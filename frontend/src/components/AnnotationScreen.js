@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Annotation from 'react-image-annotation';
+import '../components/css/styles.css';
 
 const AnnotationScreen = () => {
     const [task, setTask] = useState(null);
@@ -13,9 +14,12 @@ const AnnotationScreen = () => {
         setLoading(true);
         axios.get('http://localhost:5000/get-task')
             .then((res) => setTask(res.data.task))
-            .catch(() => setError('Failed to load task. Please try again later.'))
+            .catch(() => {
+                setTask(null); // Clear task if fetch fails
+                setError('Failed to load task. Please try again later.');
+            })
             .finally(() => setLoading(false));
-    };
+    };    
 
     useEffect(() => {
         fetchTask();

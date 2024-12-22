@@ -10,7 +10,7 @@ const App = () => {
     };
 
     return (
-        <div>
+        <div className="App">
             <h1>Labelbox Web App</h1>
             <TaskUploader onTaskUploaded={refreshTask} />
             <AnnotationScreen key={refreshKey} />

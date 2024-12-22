@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import '../components/css/styles.css';
 
 const TaskUploader = ({ onTaskUploaded }) => {
     const [imageUrl, setImageUrl] = useState('');
@@ -23,16 +24,17 @@ const TaskUploader = ({ onTaskUploaded }) => {
     };
 
     return (
-        <div>
+        <div className = "task-uploader">
             <h3>Upload Task</h3>
             <input
+                className="task-input"
                 type="text"
                 placeholder="Image URL"
                 value={imageUrl}
                 onChange={(e) => setImageUrl(e.target.value)}
                 disabled={loading}
             />
-            <button onClick={uploadTask} disabled={loading}>
+            <button onClick={uploadTask} disabled={loading} className="upload-btn">
                 {loading ? 'Uploading...' : 'Upload'}
             </button>
             {error && <p style={{ color: 'red' }}>{error}</p>}

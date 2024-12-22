@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from bson.objectid import ObjectId
 from models.db import db
+from datetime import datetime
 
 annotation = Blueprint('annotation', __name__)
 
@@ -9,16 +10,17 @@ def create_task():
     task = request.json
     if not task.get('image_url'):
         return jsonify({'message': 'Image URL is required'}), 400
+    task['created_at'] = datetime.utcnow()  # Add a timestamp
     task_id = db.tasks.insert_one(task).inserted_id
     return jsonify({'message': 'Task created successfully', 'task_id': str(task_id)}), 201
 
 @annotation.route('/get-task', methods=['GET'])
 def get_task():
-    task = db.tasks.find_one({}, {'_id': 1, 'image_url': 1})
-    if task:
-        task["_id"] = str(task["_id"])
-        return jsonify({'task': task}), 200
-    return jsonify({'message': 'No tasks found'}), 404
+    # Get the latest task based on the insertion time
+    task = db.tasks.find_one(sort=[('_id', -1)], projection={'_id': 1, 'image_url': 1})
+    if not task:
+        return jsonify({'message': 'No task found'}), 404
+    return jsonify(task), 200
 
 @annotation.route('/submit-annotation', methods=['POST'])
 def submit_annotations():
