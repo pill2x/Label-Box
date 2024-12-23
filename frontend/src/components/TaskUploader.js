@@ -24,7 +24,7 @@ const TaskUploader = ({ onTaskUploaded }) => {
     };
 
     return (
-        <div className = "task-uploader">
+        <div className="task-uploader">
             <h3>Upload Task</h3>
             <input
                 className="task-input"
@@ -37,7 +37,7 @@ const TaskUploader = ({ onTaskUploaded }) => {
             <button onClick={uploadTask} disabled={loading} className="upload-btn">
                 {loading ? 'Uploading...' : 'Upload'}
             </button>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            {error && <p className="error-text">{error}</p>}
         </div>
     );
 };

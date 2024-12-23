@@ -46,7 +46,7 @@ const AnnotationScreen = () => {
     if (loading) return <p>Loading...</p>;
 
     return (
-        <div>
+        <div className="annotation-container">
             {error ? (
                 <p>{error}</p>
             ) : task ? (
@@ -61,7 +61,9 @@ const AnnotationScreen = () => {
                             setAnnotation({});
                         }}
                     />
-                    <button onClick={saveAnnotations}>Save</button>
+                    <button onClick={saveAnnotations} className="save-btn">
+                        Save
+                    </button>
                 </div>
             ) : (
                 <p>No tasks available.</p>

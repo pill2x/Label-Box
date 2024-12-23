@@ -1,8 +1,8 @@
 /* Custom Global Styles */
 body {
-  font-family: 'Roboto', sans-serif; /* Overrides default */
-  background-color: #f9fafb; /* Light background for a clean UI */
-  color: #333; /* Text color */
+  font-family: 'Roboto', sans-serif;
+  background-color: #f9fafb;
+  color: #333;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -10,15 +10,47 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h3 {
+h1 {
   text-align: center;
   margin-bottom: 20px;
-  color: #2c3e50; /* Slightly darker color for headings */
+  color: #2c3e50;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+* {
+  box-sizing: border-box;
+}
 
+/* Responsive Layout */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.upload-screen,
+.annotation-screen {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+  .main-content {
+    flex-direction: row;
+  }
+  .upload-screen,
+  .annotation-screen {
+    flex: 1;
+  }
+}
+
+@media (max-width: 767px) {
+  .upload-screen,
+  .annotation-screen {
+    padding: 10px;
+  }
+}

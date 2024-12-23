@@ -50,6 +50,7 @@
     flex-direction: column;
     align-items: center;
     gap: 20px;
+    touch-action: none; /* Allow custom touch gestures like dragging */
   }
   
   .save-btn {
@@ -60,6 +61,7 @@
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+    margin-top: 20px;
   }
   
   .save-btn:hover {

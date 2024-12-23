@@ -18,9 +18,10 @@ def create_task():
 def get_task():
     # Get the latest task based on the insertion time
     task = db.tasks.find_one(sort=[('_id', -1)], projection={'_id': 1, 'image_url': 1})
-    if not task:
-        return jsonify({'message': 'No task found'}), 404
-    return jsonify(task), 200
+    if task:
+        task["_id"] = str(task["_id"])
+        return jsonify({'task': task}), 200
+    return jsonify({'message': 'No tasks found'}), 404
 
 @annotation.route('/submit-annotation', methods=['POST'])
 def submit_annotations():
